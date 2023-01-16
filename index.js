@@ -24,10 +24,12 @@ database.once("connected", () => {
 //creating shortcut to refer
 const app = express();
 
-
 //making express know what kind of data will he read
 app.use(express.json());
 
+//importing routes
+const routes = require("./routes/routes");
+app.use("/api", routes);
 
 //setting up server port
 app.listen(3000, () => {
