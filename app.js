@@ -2,12 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
-const postsRoute = require('./routes_test/routes_test');
+const postsRoute = require('./routes_test/posts');
 const testRoute = require('./routes_test/test1');
 
 mongoose.set('strictQuery', true);
 const mongoString = process.env.DATABASE_URL;
+
+app.use(bodyParser.json());
 
 app.use('/posts', postsRoute);
 app.use('/test', testRoute);
