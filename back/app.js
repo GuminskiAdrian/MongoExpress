@@ -22,11 +22,6 @@ app.use((req, res, next) => {
 app.use("/posts", postsRoute);
 app.use("/test", testRoute);
 
-// //middleware
-// app.use("/posts", () => {
-//     console.log("This is a middleware running");
-// });
-
 mongoose.connect(mongoString, () => {
     console.log("Connected to db");
 });

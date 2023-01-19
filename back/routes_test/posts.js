@@ -4,7 +4,7 @@ const Post = require("../models/Posts");
 
 router.get("/", async (req, res) => {
     try {
-        const posts = await Post.find().limit(5);
+        const posts = await Post.find();
         res.json(posts);
     } catch (err) {
         res.json({ message: err });
@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     const post = new Post({
-        title: req.body.title,
-        description: req.body.description,
+        title: req.title,
+        description: req.description,
         date: Date.now(),
     });
     try {
@@ -24,11 +24,8 @@ router.post("/", async (req, res) => {
     } catch (err) {
         // res.json({ message: err });
         console.log(err)
-        console.log(`res.body -> ${res.body}`);
-        console.log(err._id);
-        console.log(err.title);
-        console.log(err.description);
-        console.log(req.body);
+        console.log(req.title);
+        console.log(req.description);
     }
 });
 
