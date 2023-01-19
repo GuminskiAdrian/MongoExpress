@@ -1,5 +1,6 @@
+const { json } = require("body-parser");
 const express = require("express");
-const { Model } = require("mongoose");
+const { Model, default: mongoose } = require("mongoose");
 const router = express.Router();
 const Post = require("../models/Posts");
 
@@ -21,19 +22,17 @@ router.post("/", async (req, res) => {
     try {
         const savedPost = await post.save();
         res.json(savedPost);
-        console.log("posted");
     } catch (err) {
         console.log(err)
-        console.log(req.title);
-        console.log(req.description);
     }
 });
 
 router.delete("/", async (req, res) => {
     try {
-        const id = req.params.id;
-        Post.findByIdAndDelete(id);
-        console.log('hej');
+        const id = { "_id": "ObjectId('63c97b9790606d4d1442b437')"};
+        const del = await Post.deleteOne(id);
+        res.json(del);
+        console.log('deleted');
     } catch (err) {
         res.json({ message: err });
     }
